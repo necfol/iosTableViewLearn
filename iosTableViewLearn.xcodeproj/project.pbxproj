@@ -399,6 +399,7 @@
 				F1DB42441F3C911C0078F1E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

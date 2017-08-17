@@ -21,22 +21,43 @@
 
 -(NSArray *)groups {
     if (_groups == nil) {
-        NecfolCarGroup *carGroup = [[NecfolCarGroup alloc] init];
-        carGroup.header = @"焦点科技";
-        carGroup.footer = @"焦点科技666";
-        carGroup.cars = @[
-                          [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
-                          [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
-                          ];
-        _groups = @[carGroup];
+//        NecfolCarGroup *carGroup = [[NecfolCarGroup alloc] init];
+//        carGroup.header = @"焦点科技";
+//        carGroup.footer = @"焦点科技666";
+//        carGroup.cars = @[
+//                          [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+//                          [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+//                          ];
+//        _groups = @[carGroup];
+        _groups = @[
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                  ];
     }
     return _groups;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+//    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.frame = self.view.bounds;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = 100;
     [self.view addSubview:self.tableView];
 }
 
@@ -45,7 +66,8 @@
  */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-        return self.groups.count;
+//        return self.groups.count;
+    return 1;
 }
 
 /**
@@ -53,10 +75,18 @@
  */
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [UITableViewCell new];
-    NecfolCarGroup * group = self.groups[indexPath.section];
-    NecfolCar *car = group.cars[indexPath.row];
-    cell.textLabel.text = car.name;
+//    UITableViewCell *cell = [UITableViewCell new];
+//    NecfolCarGroup * group = self.groups[indexPath.section];
+//    NecfolCar *car = group.cars[indexPath.row];
+//    cell.textLabel.text = car.name;
+//    return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"a"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"a"];
+    }
+    NecfolCar *car = self.groups[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@-----------%zd", car.name, indexPath.row];
+    NSLog(@"%p --- %zd", cell, indexPath.row);
     return cell;
 }
 
@@ -65,21 +95,19 @@
  每一组有多少行
  */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NecfolCarGroup *group = self.groups[section];
-    return group.cars.count;
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+//    NecfolCarGroup *group = self.groups[section];
+//    return group.cars.count;
+    return self.groups.count;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NecfolCarGroup *group = self.groups[section];
-    return group.header;
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    NecfolCarGroup *group = self.groups[section];
-    return group.footer;
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    NecfolCarGroup *group = self.groups[section];
+//    return group.header;
+//}
+//
+//-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+//    NecfolCarGroup *group = self.groups[section];
+//    return group.footer;
+//}
 
 @end
