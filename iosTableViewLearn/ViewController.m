@@ -19,16 +19,22 @@
 
 @implementation ViewController
 
+-(NSArray *)groups {
+    if (_groups == nil) {
+        NecfolCarGroup *carGroup = [[NecfolCarGroup alloc] init];
+        carGroup.header = @"焦点科技";
+        carGroup.footer = @"焦点科技666";
+        carGroup.cars = @[
+                          [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
+                          [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
+                          ];
+        _groups = @[carGroup];
+    }
+    return _groups;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NecfolCarGroup *carGroup = [[NecfolCarGroup alloc] init];
-    carGroup.header = @"焦点科技";
-    carGroup.footer = @"焦点科技666";
-    carGroup.cars = @[
-                      [NecfolCar carWithName:@"MIC" AndIcon:@"ued"],
-                      [NecfolCar carWithName:@"UED" AndIcon:@"ued"],
-                      ];
-    self.groups = @[carGroup];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
