@@ -80,9 +80,11 @@
 //    NecfolCar *car = group.cars[indexPath.row];
 //    cell.textLabel.text = car.name;
 //    return cell;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"a"];
+//    被static修饰的局部变量，只会初始化一次，在整个程序运行过程中，只有一份内存
+    static NSString *ID = @"aa";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"a"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
     NecfolCar *car = self.groups[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@-----------%zd", car.name, indexPath.row];
